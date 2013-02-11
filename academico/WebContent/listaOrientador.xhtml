@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:ui="http://java.sun.com/jsf/facelets">
+	<ui:composition template="/template/_template.xhtml">
+	 <ui:define name="titulo">
+      Lista de Orientadores
+      </ui:define>
+       <ui:define name="menu">
+        <h:commandLink id="linkAluno" value="Aluno" action="#{linkBean.linkAluno}" immediate="true"  styleClass="linkAluno"></h:commandLink>
+		<h:commandLink id="linkOrientador" value="Orientador" action="#{linkBean.linkOrientador}" immediate="true" styleClass="linkOrientador" ></h:commandLink>
+		<h:commandLink id="linkCurso" value="Curso" action="#{linkBean.linkCurso}" immediate="true" styleClass="linkCurso"></h:commandLink>
+		<h:commandLink id="linkPublicacao" value="Publicação" action="#{linkBean.linkPublicacao}" immediate="true" styleClass="linkPublicacao"></h:commandLink>
+		<h:commandLink id="linkPesquisa" value="Pesquisa" action="#{linkBean.listaLinkPesquisa}" immediate="true" styleClass="linkPesquisa"></h:commandLink>
+      </ui:define>
+      <ui:define name="conteudo">
+		<h:form>
+			<h:messages/>
+     	<h:dataTable  value="#{orientadorBean.lista}" var="orientador" rules="rows" cellpadding="5">
+     	<f:facet name="caption">
+     	A listagem a seguir exibe a relação de todos os orientadores do sistema.
+     	</f:facet>
+     	<f:facet name="header">Listagem de Orientadores</f:facet>
+     	<f:facet name="footer">Final da Listagem de Orientadores</f:facet>
+     	<h:column>
+     	<f:facet name="header">CPF</f:facet>
+     	#{orientador.cpf}
+     	</h:column>
+     	<h:column>
+     	<f:facet name="header">Nome</f:facet>
+     	#{orientador.nome}
+     	</h:column>
+     	<h:column>
+     	<f:facet name="header">Titulação</f:facet>
+     	#{orientador.titulacao}
+     	</h:column>
+     	<h:column>
+     	<f:facet name="header">Instituição</f:facet>
+     	#{orientador.instituicao}
+     	</h:column>
+     	<h:column>
+     	<h:commandLink action="#{orientadorBean.editar}">
+     	<h:graphicImage library="img" name="editar.png" style="border:0"/>
+     	<f:setPropertyActionListener target="#{orientadorBean.orientador}" value="#{orientador}"/>
+     	</h:commandLink>
+     	</h:column>
+     	<h:column>
+     	<h:commandLink action="#{orientadorBean.excluir}" onclick="if(!confirm('Confirma a exclusão do orientador: #{orientador.nome}?')) return false;">
+     	<h:graphicImage library="img" name="excluir.png" style="border:0"/>
+     	<f:setPropertyActionListener target="#{orientadorBean.orientador}" value="#{orientador}"/>
+     	</h:commandLink>
+     	</h:column>
+     	</h:dataTable>
+		</h:form>
+	 </ui:define>
+     </ui:composition>
+</html>

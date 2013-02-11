@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+      <ui:composition template="/template/_template.xhtml">
+      <ui:define name="titulo">
+      Cadastro de Orientador
+      </ui:define>
+      <ui:define name="menu">
+        <h:commandLink id="linkAluno" value="Aluno" action="#{linkBean.listaLinkAluno}" immediate="true"  styleClass="linkAluno"></h:commandLink>
+		<h:commandLink id="linkOrientador" value="Orientador" action="#{linkBean.listaLinkOrientador}" immediate="true" styleClass="linkOrientador" ></h:commandLink>
+		<h:commandLink id="linkCurso" value="Curso" action="#{linkBean.listaLinkCurso}" immediate="true" styleClass="linkCurso"></h:commandLink>
+		<h:commandLink id="linkPublicacao" value="Publicação" action="#{linkBean.listaLinkPublicacao}" immediate="true" styleClass="linkPublicacao"></h:commandLink>
+		<h:commandLink id="linkPesquisa" value="Pesquisa" action="#{linkBean.listaLinkPesquisa}" immediate="true" styleClass="linkPesquisa"></h:commandLink>
+      </ui:define>
+      <ui:define name="conteudo">
+      <h:form>
+      <h:inputHidden value="#{orientadorBean.orientador.idOrientador}"/>
+      <h:messages/>
+      <fieldset>
+      <LEGEND>Cadastro de Orientador</LEGEND>
+      <h:panelGrid columns="2">
+      <h:outputLabel id="lblNome" for="lblNome" value="Nome:"/>
+      <h:inputText id="txtNome" label="lblNome" value="#{orientadorBean.orientador.nome}" required="true" requiredMessage="Informe o Nome"  styleClass="txtNome" />
+      <h:outputLabel id="lblCPF" for="lblCPF" value="CPF:"/>
+      <h:inputText id="txtCPF" lable="lblCPF" value="#{orientadorBean.orientador.cpf}"  required="true" requiredMessage="Informe o CPF" styleClass="txtCPF"/>
+       <h:outputLabel id="lblInstituicao" for="lblInstituicao" value="Instituição:"/>
+      <h:inputText id="txtInstituicao" lable="lblInstituicao" value="#{orientadorBean.orientador.instituicao}"  required="true" requiredMessage="Informe a Instituição" styleClass="txtInstituicao"/>
+       <h:outputLabel id="lblTitulacao" for="lblTitulacao" value="Titulação:"/>
+      <h:selectOneMenu id="slTitulacao" value="#{orientadorBean.titulacao}" styleClass="slTitulacao" required="true" requiredMessage="Escolha a Titulação" >
+      <f:selectItems value="#{orientadorBean.constantes.titulacoes}" var="titulacao" itemLabel="#{titulacao.nome}" itemValue="#{titulacao.nome}"/>
+      </h:selectOneMenu>
+      </h:panelGrid>
+      <h:panelGrid columns="3">
+      <h:commandButton value="Novo" action="#{orientadorBean.novo}" styleClass="btnNovo"/>
+      <h:commandButton value="Salvar" action="#{orientadorBean.salvar}" styleClass="btnSalvar"/>
+      <h:commandButton value="Excluir" action="#{orientadorBean.excluir}" styleClass="btnExcluir"/>
+      </h:panelGrid>
+       </fieldset>
+      </h:form>
+      </ui:define>
+     </ui:composition>
+</html>

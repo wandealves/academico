@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:ui="http://java.sun.com/jsf/facelets">
+       <ui:composition template="/template/_template.xhtml">
+      <ui:define name="titulo">
+      Cadastro de Orientador
+      </ui:define>
+      <ui:define name="menu">
+        <h:commandLink id="linkAluno" value="Aluno" action="#{linkBean.listaLinkAluno}" immediate="true"  styleClass="linkAluno"></h:commandLink>
+		<h:commandLink id="linkOrientador" value="Orientador" action="#{linkBean.listaLinkOrientador}" immediate="true" styleClass="linkOrientador" ></h:commandLink>
+		<h:commandLink id="linkCurso" value="Curso" action="#{linkBean.listaLinkCurso}" immediate="true" styleClass="linkCurso"></h:commandLink>
+		<h:commandLink id="linkPublicacao" value="Publicação" action="#{linkBean.listaLinkPublicacao}" immediate="true" styleClass="linkPublicacao"></h:commandLink>
+		<h:commandLink id="linkPesquisa" value="Pesquisa" action="#{linkBean.listaLinkPesquisa}" immediate="true" styleClass="linkPesquisa"></h:commandLink>
+      </ui:define>
+      <ui:define name="conteudo">
+      <h:form>
+      <h:messages/>
+      <h:inputHidden value="#{cursoBean.curso.idCurso}"/>
+      <fieldset>
+      <LEGEND>Cadastro de Curso</LEGEND>
+      <h:panelGrid columns="2">
+      <h:outputLabel id="lblNome" for="lblNome" value="Nome:"/>
+      <h:inputText id="txtNome" label="lblNome" required="true" requiredMessage="Informe o nome" value="#{cursoBean.curso.nome}" styleClass="txtNome" />
+      </h:panelGrid>
+      </fieldset>
+      <br/>
+      <h:panelGrid columns="3">
+      <h:commandButton value="Novo" action="#{cursoBean.novo}"/>
+      <h:commandButton value="Salvar" action="#{cursoBean.salvar}"/>
+      <h:commandButton value="Excluir" action="#{cursoBean.excluir}"/>
+      </h:panelGrid>
+      </h:form>
+        </ui:define>
+     </ui:composition>
+</html>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/template/_template.xhtml">
+    <ui:define name="titulo">
+      Cadastro de Aluno
+      </ui:define>
+       <ui:define name="menu">
+        <h:commandLink id="linkAluno" value="Aluno" action="#{linkBean.listaLinkAluno}" immediate="true"  styleClass="linkAluno"></h:commandLink>
+		<h:commandLink id="linkOrientador" value="Orientador" action="#{linkBean.listaLinkOrientador}" immediate="true" styleClass="linkOrientador" ></h:commandLink>
+		<h:commandLink id="linkCurso" value="Curso" action="#{linkBean.listaLinkCurso}" immediate="true" styleClass="linkCurso"></h:commandLink>
+		<h:commandLink id="linkPublicacao" value="Publicação" action="#{linkBean.listaLinkPublicacao}" immediate="true" styleClass="linkPublicacao"></h:commandLink>
+		<h:commandLink id="linkPesquisa" value="Pesquisa" action="#{linkBean.listaLinkPesquisa}" immediate="true" styleClass="linkPesquisa"></h:commandLink>
+      </ui:define>
+      <ui:define name="conteudo">
+      <h:form>
+      <h:messages/>
+      <h:inputHidden value="#{alunoBean.aluno.idAluno}"/>
+      <fieldset>
+      <LEGEND>Cadastro de Aluno</LEGEND>
+      <h:panelGrid columns="2">
+      <h:outputLabel id="lblMatricula" for="lblMatricula" value="Matricula:"/>
+      <h:inputText id="txtMatricula" label="lblMatricila" value="#{alunoBean.aluno.matricula}" required="true" maxlength="100" requiredMessage="Informe a Matricula" validatorMessage="A matricula ultrapassou 100 caracteres" styleClass="txtMatricula">
+      <f:validateLength maximum="100"/>
+      </h:inputText>
+      <h:outputLabel id="lblNome" for="lblNome" value="Nome:"/>
+      <h:inputText id="txtNome" label="lblNome" value="#{alunoBean.aluno.nome}" maxlength="100" required="true" requiredMessage="Informe o Nome" validatorMessage="O nome ultrapassou 100 caracteres"  styleClass="txtNome" >
+       <f:validateLength maximum="100"/>
+      </h:inputText>
+      <h:outputLabel id="lblSexo" for="lblSexo" value="Sexo:"/>
+      <h:selectOneRadio value="#{alunoBean.sexo}" required="true" requiredMessage="Selecione o Sexo" >
+   	  <f:selectItems value="#{alunoBean.constantes.sexos}" var="s" itemLabel="#{s.descricao}" itemValue="#{s.tipo}" />
+   	  </h:selectOneRadio>
+      
+      <h:outputLabel id="lblDataNascimento" for="lblDataNascimento" value="Data Nascimento:"/>
+      <h:inputText id="txtDataNascimento" label="lblDataNascimento" value="#{alunoBean.aluno.dataNascimento.time}" required="true" requiredMessage="Informe a Data de Nascimento(dd//MM/yyyy)"  styleClass="txtDataNascimento">
+      <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+      </h:inputText>
+      <h:outputLabel id="lblCPF" for="lblCPF" value="CPF:"/>
+      <h:inputText id="txtCPF" lable="lblCPF" value="#{alunoBean.aluno.cpf}" maxlength="20" required="true" requiredMessage="Informeo CPF" validatorMessage="O CPF ultrapassou 20 caracteres"  styleClass="txtCPF">
+      <f:validateLength maximum="20"/>
+      </h:inputText>
+      </h:panelGrid>
+      </fieldset>
+      <br/>
+      <fieldset>
+      <LEGEND>Orientador do Aluno</LEGEND>
+      <h:panelGrid columns="2">
+      <h:outputLabel id="lblOrientador" for="lblOrientador" value="Selecione o Orientador:"/>
+      <h:selectOneMenu id="orientador" value="#{alunoBean.idOrientador}" styleClass="slOrientador" required="true" requiredMessage="Escolha um Orientador" >
+      <f:selectItems value="#{alunoBean.orientadores}" var="orientador" itemLabel="#{orientador.nome}" itemValue="#{orientador.idOrientador}"/>
+      </h:selectOneMenu>
+      <h:commandButton id="btnGravarOriendaor" value="Gravar Orientador" action="#{alunoBean.gravarOrientador}">
+      <f:ajax execute="orientador"/>
+      </h:commandButton>
+      
+      <h:commandLink action="#{alunoBean.novoOrientador}" immediate="true">
+      <h:graphicImage library="img" name="novo.png"></h:graphicImage>
+      <f:ajax execute="orientador"/>
+      </h:commandLink>
+        
+      </h:panelGrid>
+      </fieldset>
+      
+      <br/>
+         <h:panelGrid columns="3">
+      <h:commandButton id="btnNovo"    value="Novo"     styleClass="btnNovo" action="#{alunoBean.novo}"/>
+      <h:commandButton id="btnSalvar"  value="Salvar"   styleClass="btnSalvar" action="#{alunoBean.gravarAluno}"/>
+      <h:commandButton id="btnExcluir" value="Excluir"  styleClass="btnExcluir" action="#{alunoBean.excluirAluno}"/>
+      </h:panelGrid>
+      
+      </h:form>
+      </ui:define>#tabsI {
+      float:left;
+      width:100%;
+      background:#EFF4FA;
+      font-size:93%;
+      line-height:normal;
+	  border-bottom:1px solid #DD740B;
+}
+#tabsI ul {
+	margin:0;
+	padding:10px 10px 0 50px;
+	list-style:none;
+}
+#tabsI li {
+      display:inline;
+      margin:0;
+      padding:0;
+}
+#tabsI a {
+      float:left;
+      background:url("tableftI.gif") no-repeat left top;
+      margin:0;
+      padding:0 0 0 5px;
+      text-decoration:none;
+}
+#tabsI a span {
+      float:left;
+      display:block;
+      background:url("tabrightI.gif") no-repeat right top;
+      padding:5px 15px 4px 6px;
+      color:#FFF;
+}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#tabsI a span {float:none;}
+/* End IE5-Mac hack */
+#tabsI a:hover span {
+      color:#FFF;
+}
+#tabsI a:hover {
+      background-position:0% -42px;
+}
+#tabsI a:hover span {
+      background-position:100% -42px;
+}#tabsI {
+      float:left;
+      width:100%;
+      background:#EFF4FA;
+      font-size:93%;
+      line-height:normal;
+	  border-bottom:1px solid #DD740B;
+}
+#tabsI ul {
+	margin:0;
+	padding:10px 10px 0 50px;
+	list-style:none;
+}
+#tabsI li {
+      display:inline;
+      margin:0;
+      padding:0;
+}
+#tabsI a {
+      float:left;
+      background:url("tableftI.gif") no-repeat left top;
+      margin:0;
+      padding:0 0 0 5px;
+      text-decoration:none;
+}
+#tabsI a span {
+      float:left;
+      display:block;
+      background:url("tabrightI.gif") no-repeat right top;
+      padding:5px 15px 4px 6px;
+      color:#FFF;
+}
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#tabsI a span {float:none;}
+/* End IE5-Mac hack */
+#tabsI a:hover span {
+      color:#FFF;
+}
+#tabsI a:hover {
+      background-position:0% -42px;
+}
+#tabsI a:hover span {
+      background-position:100% -42px;
+}
+ </ui:composition>
+</html>

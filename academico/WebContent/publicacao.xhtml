@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+      
+      <ui:composition template="/template/_template.xhtml">
+      <ui:define name="titulo">
+      Cadastro de Orientador
+      </ui:define>
+      <ui:define name="menu">
+        <h:commandLink id="linkAluno" value="Aluno" action="#{linkBean.listaLinkAluno}" immediate="true"  styleClass="linkAluno"></h:commandLink>
+		<h:commandLink id="linkOrientador" value="Orientador" action="#{linkBean.listaLinkOrientador}" immediate="true" styleClass="linkOrientador" ></h:commandLink>
+		<h:commandLink id="linkCurso" value="Curso" action="#{linkBean.listaLinkCurso}" immediate="true" styleClass="linkCurso"></h:commandLink>
+		<h:commandLink id="linkPublicacao" value="Publicação" action="#{linkBean.listaLinkPublicacao}" immediate="true" styleClass="linkPublicacao"></h:commandLink>
+		<h:commandLink id="linkPesquisa" value="Pesquisa" action="#{linkBean.listaLinkPesquisa}" immediate="true" styleClass="linkPesquisa"></h:commandLink>
+      </ui:define>
+      <ui:define name="conteudo">
+      <h:form>
+      <h:inputHidden value="#{orientadorBean.orientador.idOrientador}"/>
+      <h:messages/>
+      <fieldset>
+      <LEGEND>Cadastro de Orientador</LEGEND>
+      <h:panelGrid columns="2">
+      <h:outputLabel id="lblTitulo" for="lblTitulo" value="Titulo:" styleClass="lblTitulo"/>
+      <h:inputText id="txtTitulo" label="lblTitulo" value="#{publicacaoBean.publicacao.titulo}" required="true" requiredMessage="Informe o Titulo da Publicação" styleClass="txtTitulo"></h:inputText>
+      
+      <h:outputLabel id="lblTipo" for="lblTipo" value="Selecione o Tipo de Publicação" styleClass="lblTipo"/>
+      <h:selectOneMenu id="slTipo" value="#{publicacaoBean.tipo}" styleClass="slTipo" required="true" requiredMessage="Escolha o Tipo de Publicação" >
+      <f:selectItems value="#{publicacaoBean.constantes.tipoPublicacao}" var="tipoPublicacao" itemLabel="#{tipoPublicacao.nome}" itemValue="#{tipoPublicacao.nome}"/>
+      </h:selectOneMenu>
+      
+      <h:outputLabel id="lblDataPublicacao" for="lblDataPublicacao" value="Data Publicação:" styleClass="lblDataPublicacao"/>
+      <h:inputText id="txtDataPublicacao" label="lblDataPublicacao" value="#{publicacaoBean.publicacao.dataPublicacao.time}" required="true" requiredMessage="Informe a Data de Publicação(dd//MM/yyyy)"  styleClass="txtDataPublicacao">
+      <f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+      </h:inputText>
+            </h:panelGrid>
+      
+       <fieldset>
+      <LEGEND>Orientador</LEGEND>
+      <h:panelGrid columns="2">
+      <h:outputLabel id="lblOrientador" for="lblOrientador" value="Selecione o Orientador:" styleClass="lblOrientador"/>
+      <h:selectOneMenu id="orientador" value="#{publicacaoBean.idOrientador}" styleClass="slOrientador" required="true" requiredMessage="Escolha um Orientador" >
+      <f:selectItems value="#{publicacaoBean.orientadores}" var="orientador" itemLabel="#{orientador.nome}" itemValue="#{orientador.idOrientador}"/>
+      </h:selectOneMenu>
+      <h:commandButton id="btnGravarOriendaor" value="Gravar Orientador" action="#{publicacaoBean.gravarOrientador}" styleClass="btnGravarOriendaor">
+      <f:ajax execute="orientador"/>
+      </h:commandButton>
+      
+      <h:commandLink action="#{publicacaoBean.novoOrientador}" title="Clique Aqui para Cadastrar um novo Orientador" immediate="true" styleClass="linkNovoOrientador">
+      <h:graphicImage library="img" name="novo.png"></h:graphicImage>
+      <f:ajax execute="orientador"/>
+      </h:commandLink>
+        
+      </h:panelGrid>
+      </fieldset>
+      
+      
+       <fieldset>
+      <LEGEND>Aluno</LEGEND>
+      <h:panelGrid columns="2">
+      <h:outputLabel id="lblAluno" for="lblAluno" value="Selecione o Aluno:" styleClass="lblAluno"/>
+      <h:selectOneMenu id="slAluno" value="#{publicacaoBean.idAluno}" styleClass="slAluno" required="true" requiredMessage="Escolha um Aluno" >
+      <f:selectItems value="#{publicacaoBean.alunos}" var="aluno" itemLabel="#{aluno.nome}" itemValue="#{aluno.idAluno}"/>
+      </h:selectOneMenu>
+      <h:commandButton id="btnGravarAluno" value="Gravar Aluno" action="#{publicacaoBean.gravarAluno}" styleClass="btnGravarAluno">
+      <f:ajax execute="slAluno"/>
+      </h:commandButton>
+      
+      <h:commandLink action="#{publicacaoBean.novoAluno}" immediate="true" styleClass="linkNovoAluno">
+      <h:graphicImage library="img" name="novo.png"></h:graphicImage>
+      <f:ajax execute="slAluno"/>
+      </h:commandLink>
+        
+      </h:panelGrid>
+      </fieldset>
+      
+
+      <h:panelGrid columns="3">
+      <h:commandButton value="Novo" action="#{orientadorBean.novo}" styleClass="btnNovo"/>
+      <h:commandButton value="Salvar" action="#{orientadorBean.salvar}" styleClass="btnSalvar"/>
+      <h:commandButton value="Excluir" action="#{orientadorBean.excluir}" styleClass="btnExcluir"/>
+      </h:panelGrid>
+       </fieldset>
+      </h:form>
+      </ui:define>
+     </ui:composition>
+</html>
