@@ -5,16 +5,6 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <ui:composition template="/template/_template.xhtml">
-     <ui:define name="titulo">
-      Lista de Alunos
-      </ui:define>
-       <ui:define name="menu">
-        <h:commandLink id="linkAluno" value="Aluno" action="#{linkBean.linkAluno}" immediate="true"  styleClass="linkAluno"></h:commandLink>
-		<h:commandLink id="linkOrientador" value="Orientador" action="#{linkBean.linkOrientador}" immediate="true" styleClass="linkOrientador" ></h:commandLink>
-		<h:commandLink id="linkCurso" value="Curso" action="#{linkBean.linkCurso}" immediate="true" styleClass="linkCurso"></h:commandLink>
-		<h:commandLink id="linkPublicacao" value="Publicação" action="#{linkBean.linkPublicacao}" immediate="true" styleClass="linkPublicacao"></h:commandLink>
-		<h:commandLink id="linkPesquisa" value="Pesquisa" action="#{linkBean.listaLinkPesquisa}" immediate="true" styleClass="linkPesquisa"></h:commandLink>
-      </ui:define>
       <ui:define name="conteudo">
       <h:form>
       <h:messages/>

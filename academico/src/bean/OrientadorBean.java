@@ -33,16 +33,20 @@ public class OrientadorBean {
 			FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Erro a Salvar Orientador"));
 			return null;
 		}
-		return "/listaOrientador?faces-redirect=true";
+		return null;
 	}
 	
-	public void excluir(){
-		try {
+	public void excluir()
+	{
+		try 
+		{
 			OrientadorRN.deletar(orientador);
 			this.orientador = new Orientador();
 			this.constantes = new Constantes();
 			this.lista = null;
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 			FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Erro ao excluir Orientador"));
 		}
 	}

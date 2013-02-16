@@ -4,24 +4,13 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-      
       <ui:composition template="/template/_template.xhtml">
-      <ui:define name="titulo">
-      Cadastro de Orientador
-      </ui:define>
-      <ui:define name="menu">
-        <h:commandLink id="linkAluno" value="Aluno" action="#{linkBean.listaLinkAluno}" immediate="true"  styleClass="linkAluno"></h:commandLink>
-		<h:commandLink id="linkOrientador" value="Orientador" action="#{linkBean.listaLinkOrientador}" immediate="true" styleClass="linkOrientador" ></h:commandLink>
-		<h:commandLink id="linkCurso" value="Curso" action="#{linkBean.listaLinkCurso}" immediate="true" styleClass="linkCurso"></h:commandLink>
-		<h:commandLink id="linkPublicacao" value="Publicação" action="#{linkBean.listaLinkPublicacao}" immediate="true" styleClass="linkPublicacao"></h:commandLink>
-		<h:commandLink id="linkPesquisa" value="Pesquisa" action="#{linkBean.listaLinkPesquisa}" immediate="true" styleClass="linkPesquisa"></h:commandLink>
-      </ui:define>
       <ui:define name="conteudo">
       <h:form>
       <h:inputHidden value="#{orientadorBean.orientador.idOrientador}"/>
       <h:messages/>
       <fieldset>
-      <LEGEND>Cadastro de Orientador</LEGEND>
+      <LEGEND>Cadastro de Publicação</LEGEND>
       <h:panelGrid columns="2">
       <h:outputLabel id="lblTitulo" for="lblTitulo" value="Titulo:" styleClass="lblTitulo"/>
       <h:inputText id="txtTitulo" label="lblTitulo" value="#{publicacaoBean.publicacao.titulo}" required="true" requiredMessage="Informe o Titulo da Publicação" styleClass="txtTitulo"></h:inputText>
@@ -72,7 +61,12 @@
       <h:graphicImage library="img" name="novo.png"></h:graphicImage>
       <f:ajax execute="slAluno"/>
       </h:commandLink>
-        
+      
+      <h:dataTable id="listaAluno" value="#{publicacaoBean.alunoDataTable}" var="alunos">
+      </h:dataTable>
+      <h:column>
+      <h:outputLabel value="#{alunos.nome}"/>
+      </h:column>
       </h:panelGrid>
       </fieldset>
       

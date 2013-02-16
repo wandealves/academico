@@ -1,6 +1,7 @@
 package bean;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -28,6 +29,7 @@ public class PublicacaoBean {
 	private List<Orientador> orientadores;
 	private long idAluno;
 	private List<Aluno> alunos;
+	private Set<Aluno> alunoDataTable;
 	public String tipo;
 
 	public Publicacao getPublicacao() {
@@ -96,6 +98,16 @@ public class PublicacaoBean {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+	
+	
+
+	public Set<Aluno> getAlunoDataTable() {
+		return alunoDataTable;
+	}
+
+	public void setAlunoDataTable(Set<Aluno> alunoDataTable) {
+		this.alunoDataTable = alunoDataTable;
+	}
 
 	public String salvar()
 	{
@@ -142,6 +154,15 @@ public class PublicacaoBean {
 	}
 	
 	public void gravarAluno(){
+		
+		try {
+			Aluno aluno = AlunoRN.buscarAlunoID(idAluno);
+			this.alunoDataTable.add(aluno);
+		} catch (Exception e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

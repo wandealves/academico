@@ -198,5 +198,35 @@ public class ObterObject <T>{
             
             return obj;
         }
+        
+        public void deletaAssociativa(String tabelaAssociativa,String filtro,long id) {
+             try
+             {
+            	 //SELECT * FROM EMPLOYEE WHERE id = :employee_id
+            	 if(id > 0 && !tabelaAssociativa.isEmpty() && !filtro.isEmpty()){
+                this.transacao                                             = this.session.beginTransaction();
+                String sql                                                 = "DELETE FROM "+tabelaAssociativa+" WHERE "+filtro+" = : id";
+                SQLQuery query                                             = this.session.createSQLQuery(sql);
+                query.setParameter("id", id);
+                this.transacao.commit();
+            	 }
+             }
+             catch(Exception erro)
+             {
+                 if(this.transacao.isActive())
+                     this.transacao.rollback();
+             }
+             finally
+             {
+                 try
+                 {
+                     if(this.session.isOpen())
+                         this.session.close();
+                 }
+                 catch(Exception e)
+                 {
+                 }
+             }
+        }
 
 }

@@ -1,14 +1,13 @@
 package bean;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import util.Constantes;
-
 import RN.AlunoRN;
 import RN.OrientadorRN;
 import modelo.Aluno;
@@ -66,9 +65,9 @@ public class AlunoBean
 			AlunoRN.salvar(aluno);
 		} catch (Exception e) 
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Erro a Salvar Aluno"));
 		}
+		FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Aluno Salvo com Sucesso!"));
 	}
 	
 	public void excluirAluno()
@@ -80,14 +79,13 @@ public class AlunoBean
 		} 
 		catch (Exception e) 
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Erro ao Excluir Aluno"));
 		}
+		FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Aluno Excluido com Sucesso!"));
 	}
 	
 	public void novo()
 	{
-		//this.aluno.setSexo();
 		this.aluno = new Aluno();
 	}
 	

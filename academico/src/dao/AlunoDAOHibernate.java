@@ -14,6 +14,8 @@ public class AlunoDAOHibernate implements AlunoDAO{
 
 	@Override
 	public void deletar(Aluno aluno) throws Exception {
+		ObterObject<Aluno> obj = new  ObterObject<Aluno>(new Aluno());
+		obj.deletaAssociativa("curso_aluno","idAluno",aluno.getIdAluno());
 		InsertUpdate.deletar(aluno);
 	}
 

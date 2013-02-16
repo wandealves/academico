@@ -39,7 +39,7 @@ public class LinkBean {
 	{
 		return "curso?faces-redirect=true";
 	}
-	public String lLinkPublicacao()
+	public String linkPublicacao()
 	{
 		return "publicacao?faces-redirect=true";
 	}
