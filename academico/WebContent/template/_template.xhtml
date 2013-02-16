@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+
+Name       : Accomplishable
+Description: A two-column, fixed-width design.
+Version    : 1.0
+Released   : 20090731
+
+-->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Gestão Acadêmico</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<link href="./resources/css/style.css" rel="stylesheet" type="text/css" media="screen" />
+</h:head>
+<h:body>
+
+<!-- start header -->
+<div id="header">
+	<h1>Gestão Acadêmico</h1>
+	<p> Versão 1.0</p>
+</div>
+<!-- end header -->
+<!-- start page -->
+
+	<div id="page">
+		<div id="page-bgtop">
+			<div id="page-bgbtm">
+				<!-- start content -->
+				<div id="content">
+				<ui:insert name="conteudo">
+				
+					<div class="post">
+						<h2 class="title">About This Website</h2>
+						<div class="entry">
+							
+						</div>
+					</div>
+					
+				</ui:insert>
+				</div>
+				<!-- end content -->
+				<!-- start sidebar -->
+				<div id="sidebar">
+				<h:form>
+					<ul>
+						<li>
+							<h2>Cadastros</h2>
+							<ul>
+								<li><h:commandLink value="Aluno" action="#{linkBean.linkAluno}" immediate="true"  ></h:commandLink></li>
+								<li><h:commandLink value="Orientador" action="#{linkBean.linkOrientador}" immediate="true"  ></h:commandLink></li>
+								<li><h:commandLink value="Curso" action="#{linkBean.linkCurso}" immediate="true" ></h:commandLink></li>
+								<li><h:commandLink value="Publicação" action="#{linkBean.linkPublicacao}" immediate="true" ></h:commandLink></li>
+							</ul>
+						</li>
+						<li>
+							<h2>Listas</h2>
+							<ul>
+							   <li><h:commandLink  value="Aluno" action="#{linkBean.listaLinkAluno}" immediate="true"  styleClass="linkAluno"></h:commandLink></li>
+								<li><h:commandLink  value="Orientador" action="#{linkBean.listaLinkOrientador}" immediate="true" styleClass="linkOrientador" ></h:commandLink></li>
+								<li><h:commandLink  value="Curso" action="#{linkBean.listaLinkCurso}" immediate="true" styleClass="linkCurso"></h:commandLink></li>
+								<li><h:commandLink value="Publicação" action="#{linkBean.listaLinkPublicacao}" immediate="true" styleClass="linkPublicacao"></h:commandLink></li>
+							</ul>
+						</li>
+						<li>
+							<h2>Relatórios</h2>
+							<ul>
+								<li><a href="#">Alunos</a> (23)</li>
+								<li><a href="#">Publicações</a> (31)</li>
+							</ul>
+						</li>
+					</ul>
+					
+					</h:form>
+				</div>
+				<!-- end sidebar -->
+				<div style="clear:both">&nbsp;</div>
+			</div>
+		</div>
+	</div>
+<div id="footer">
+	<p>&copy;2013 All Rights Reserved &nbsp;&bull;&nbsp; Design by <a href="http://www.freecsstemplates.org">FCT</a> &nbsp;&bull;&nbsp; Icons by <a href="http://www.famfamfam.com/">FAMFAMFAM</a>.</p>
+</div>
+</h:body>
+</html>
