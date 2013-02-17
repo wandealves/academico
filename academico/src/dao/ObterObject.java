@@ -204,8 +204,9 @@ public class ObterObject <T>{
              {
             	 //SELECT * FROM EMPLOYEE WHERE id = :employee_id
             	 if(id > 0 && !tabelaAssociativa.isEmpty() && !filtro.isEmpty()){
-                this.transacao                                             = this.session.beginTransaction();
-                String sql                                                 = "DELETE FROM "+tabelaAssociativa+" WHERE "+filtro+" = : id";
+                this.session = HibernateUtil.getSessionFactory().getCurrentSession();
+                this.transacao = this.session.beginTransaction();
+                String sql                                                 = "DELETE FROM "+tabelaAssociativa+" WHERE "+filtro+" = :id";
                 SQLQuery query                                             = this.session.createSQLQuery(sql);
                 query.setParameter("id", id);
                 this.transacao.commit();

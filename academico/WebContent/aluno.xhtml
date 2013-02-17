@@ -41,17 +41,20 @@
       <LEGEND>Orientador do Aluno</LEGEND>
       <h:panelGrid columns="2">
       <h:outputLabel id="lblOrientador" for="lblOrientador" value="Selecione o Orientador:"/>
-      <h:selectOneMenu id="orientador" value="#{alunoBean.idOrientador}" styleClass="slOrientador" required="true" requiredMessage="Escolha um Orientador" >
+      <h:selectOneMenu id="orientador" value="#{alunoBean.idOrientadorSelecionado}" styleClass="slOrientador" required="true" requiredMessage="Escolha um Orientador" >
       <f:selectItems value="#{alunoBean.orientadores}" var="orientador" itemLabel="#{orientador.nome}" itemValue="#{orientador.idOrientador}"/>
       </h:selectOneMenu>
       <h:commandButton id="btnGravarOriendaor" value="Gravar Orientador" action="#{alunoBean.gravarOrientador}">
-      <f:ajax execute="orientador"/>
+      <f:ajax execute="orientador" render="txtOrientdaorSelecionado"/>
       </h:commandButton>
       
       <h:commandLink action="#{alunoBean.novoOrientador}" immediate="true">
       <h:graphicImage library="img" name="novo.png"></h:graphicImage>
-      <f:ajax execute="orientador"/>
       </h:commandLink>
+      
+      
+      <h:outputLabel id="lblOrientadorSelecionado" for="lblOrientadorSelecionado" value="Orientador Selecionado:"/>
+      <h:outputText id="txtOrientdaorSelecionado" value="#{alunoBean.nomeOrientadorSelecionado}" style="font-family: arial;font-weight: bold;"/>
         
       </h:panelGrid>
       </fieldset>

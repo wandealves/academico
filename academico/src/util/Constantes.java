@@ -49,9 +49,11 @@ public class Constantes
 	
 	public Sexo[] getSexos() 
 	{	 
-		Sexo[] sexos = new Sexo[2];
+		Sexo[] sexos = new Sexo[3];
 		sexos[0] = new Sexo("Masculino", (byte)1);
 		sexos[1] = new Sexo("Feminino", (byte)2);
+		sexos[2] = new Sexo("Emo", (byte)2);
+		
 		return sexos;
 	}
 	

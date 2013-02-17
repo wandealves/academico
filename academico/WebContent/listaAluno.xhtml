@@ -31,7 +31,7 @@
      	#{aluno.dataNascimento.time}
      	</h:column>
      	<h:column>
-     	<h:commandLink actionListener="#{alunoBean.editar}">
+     	<h:commandLink action="#{alunoBean.editar}" >
      	<h:graphicImage library="img" name="editar.png" style="border:0"/>
      	<f:setPropertyActionListener target="#{alunoBean.aluno}" value="#{aluno}"/>
      	</h:commandLink>
