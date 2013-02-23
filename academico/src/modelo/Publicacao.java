@@ -2,6 +2,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.*;
+
 import javax.persistence.*;
 @Entity
 public class Publicacao implements Serializable{
@@ -14,7 +15,8 @@ public class Publicacao implements Serializable{
     @GeneratedValue
 	private long idPublicacao;
 	private String titulo;
-	private Calendar dataPublicacao;
+	@Temporal(TemporalType.DATE)
+	private Calendar dataPublicacao = Calendar.getInstance();
 	private String tipo;
 	@ManyToOne
     @JoinColumn(name="idOrientador")

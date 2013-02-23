@@ -3,7 +3,9 @@ package dao;
 import java.util.List;
 
 import modelo.Aluno;
-
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 public class AlunoDAOHibernate implements AlunoDAO{
 
 	@Override
@@ -13,34 +15,52 @@ public class AlunoDAOHibernate implements AlunoDAO{
 	}
 
 	@Override
-	public void deletar(Aluno aluno) throws Exception {
+	public void deletar(Aluno aluno) throws Exception 
+	{
 		ObterObject<Aluno> obj = new  ObterObject<Aluno>(new Aluno());
-		obj.deletaAssociativa("curso_aluno","idAluno",aluno.getIdAluno());
 		InsertUpdate.deletar(aluno);
 	}
 
 	@Override
-	public Aluno buscarAlunoID(long id) throws Exception {
+	public Aluno buscarAlunoID(long id) throws Exception
+	{
 		ObterObject<Aluno> obj = new  ObterObject<Aluno>(new Aluno());
 		return (Aluno)obj.buscarObjectID(id, "idAluno");
 	}
 
 	@Override
-	public Aluno buscarAlunoMatricula(String matricula) throws Exception {
+	public Aluno buscarAlunoMatricula(String matricula) throws Exception
+	{
 		ObterObject<Aluno> obj = new  ObterObject<Aluno>(new Aluno());
 		return (Aluno)obj.buscarObjectID(matricula, "matricula");
 	}
 
 	@Override
-	public Aluno buscarAlunoCPF(String cpf) throws Exception {
+	public Aluno buscarAlunoCPF(String cpf) throws Exception 
+	{
 		ObterObject<Aluno> obj = new  ObterObject<Aluno>(new Aluno());
 		return (Aluno)obj.buscarObjectUnique(cpf, "cpf");
 	}
 
 	@Override
-	public List<Aluno> listar() throws Exception {
+	public List<Aluno> listar() throws Exception 
+	{
 		ObterObject<Aluno> obj = new  ObterObject<Aluno>(new Aluno());
 		return obj.listar();
+	}
+
+	@Override
+	public boolean verificaExistencia(long id, String nomeTabela, String campo)throws Exception 
+	{
+		ObterObject<Aluno> obj = new  ObterObject<Aluno>(new Aluno());
+		return obj.verificaExistencia(id, nomeTabela, campo);
+	}
+
+	@Override
+	public List<Aluno> buscaOrientadorAluno(long id) throws Exception 
+	{
+		ObterObject<Aluno> obj = new  ObterObject<Aluno>(new Aluno());
+		return obj.buscaPorIdRelacionamento(id,"idOrientador");
 	}
 
 }

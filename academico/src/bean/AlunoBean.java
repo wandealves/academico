@@ -1,5 +1,4 @@
 package bean;
-
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -14,23 +13,26 @@ import RN.AlunoRN;
 import RN.OrientadorRN;
 import modelo.Aluno;
 import modelo.Orientador;
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 @ManagedBean
 @SessionScoped
 public class AlunoBean 
 {
-	private Aluno aluno = new Aluno();
-	private Constantes constantes = new Constantes();
+	private Aluno aluno 							= new Aluno();
+	private Constantes constantes 					= new Constantes();
 	private byte sexo;
 	private List<Orientador> orientadores;
 	private List<Aluno> listaAlunos;
 	private String nomeOrientadorSelecionado;
 	private long idOrientadorSelecionado;
-
+	
 	public Aluno getAluno() 
 	{
 		return aluno;
 	}
-
+	
 	public void setAluno(Aluno aluno) 
 	{
 		this.aluno = aluno;
@@ -40,12 +42,12 @@ public class AlunoBean
 	{
 		return OrientadorRN.listar();
 	}
-	
+		
 	public Constantes getConstantes() 
 	{
 		return constantes;
 	}
-	
+		
 	public List<Aluno> getListaAlunos() throws Exception
 	{
 		if(this.listaAlunos == null)
@@ -61,10 +63,14 @@ public class AlunoBean
 		{
 			if(aluno.getOrientador() != null)
 			{
-			this.aluno.setSexo(sexo);
-			AlunoRN.salvar(aluno);
-			novo();
-			FacesContext.getCurrentInstance().addMessage("aluno", new FacesMessage("Aluno Salvo com Sucesso!"));
+				if(this.aluno != null)
+				{
+					this.aluno.setSexo(sexo);
+					AlunoRN.salvar(aluno);
+					novo();
+					this.listaAlunos = null;
+					FacesContext.getCurrentInstance().addMessage("aluno", new FacesMessage("Aluno Salvo com Sucesso!"));
+				}
 			}
 			else
 			{
@@ -74,28 +80,33 @@ public class AlunoBean
 		{
 			FacesContext.getCurrentInstance().addMessage("aluno", new FacesMessage("Erro a Salvar Aluno"));
 		}
-		
 	}
 	
 	public void excluirAluno()
 	{
 		try 
-		{
-			AlunoRN.deletar(aluno);
-			this.listaAlunos = null;
-			this.novo();
+		{ 
+			if(this.aluno != null)
+			{
+				AlunoRN.verificaExistencia(aluno.getIdAluno());
+				AlunoRN.deletar(aluno);
+				this.listaAlunos = null;
+				this.novo();
+				FacesContext.getCurrentInstance().addMessage("aluno", new FacesMessage("Aluno Excluido com Sucesso!"));
+				this.listaAlunos = null;
+			}
 		} 
-		catch (Exception e) 
+		catch (Exception erro) 
 		{
-			FacesContext.getCurrentInstance().addMessage("aluno", new FacesMessage("Erro ao Excluir Aluno"));
+			FacesContext.getCurrentInstance().addMessage("aluno", new FacesMessage(erro.getMessage()));
+			return;
 		}
-		FacesContext.getCurrentInstance().addMessage("aluno", new FacesMessage("Aluno Excluido com Sucesso!"));
 	}
 	
-	public void novo()
+	public String novo()
 	{
-		this.aluno = new Aluno();
-		this.nomeOrientadorSelecionado = null;
+		this.nomeOrientadorSelecionado = "";
+		return "aluno?faces-redirect=true";
 	}
 	
 	public String editar()
@@ -103,13 +114,16 @@ public class AlunoBean
 		this.sexo = aluno.getSexo();
 		return "aluno?faces-redirect=true";
 	}
-
+	
 	public void gravarOrientador() throws Exception
 	{
-		if(this.idOrientadorSelecionado > 0){
-		Orientador orientador = OrientadorRN.buscarOrientadorID(this.idOrientadorSelecionado);
-		this.aluno.setOrientador(orientador);
-		this.nomeOrientadorSelecionado = orientador.getNome();
+		if(this.aluno == null)
+			this.aluno = new Aluno();
+		if(this.idOrientadorSelecionado > 0)
+		{
+			Orientador orientador = OrientadorRN.buscarOrientadorID(this.idOrientadorSelecionado);
+			this.aluno.setOrientador(orientador);
+			this.nomeOrientadorSelecionado = orientador.getNome();
 		}
 		else
 		{
@@ -117,34 +131,38 @@ public class AlunoBean
 		}
 	}
 	
-	public String novoOrientador(){
-		
+	public String novoOrientador()
+	{
 		return "orientador?faces-redirect=true";
 	}
-
-	public byte getSexo() {
+	
+	public byte getSexo() 
+	{
 		return sexo;
 	}
-
-	public void setSexo(byte sexo) {
+	
+	public void setSexo(byte sexo) 
+	{
 		this.sexo = sexo;
 	}
-
-	public String getNomeOrientadorSelecionado() {
+	
+	public String getNomeOrientadorSelecionado() 
+	{
 		return nomeOrientadorSelecionado;
 	}
-
-	public void setNomeOrientadorSelecionado(String nomeOrientadorSelecionado) {
+	
+	public void setNomeOrientadorSelecionado(String nomeOrientadorSelecionado) 
+	{
 		this.nomeOrientadorSelecionado = nomeOrientadorSelecionado;
 	}
-
-	public long getIdOrientadorSelecionado() {
+	
+	public long getIdOrientadorSelecionado()
+	{
 		return idOrientadorSelecionado;
 	}
-
-	public void setIdOrientadorSelecionado(long idOrientadorSelecionado) {
+	
+	public void setIdOrientadorSelecionado(long idOrientadorSelecionado) 
+	{
 		this.idOrientadorSelecionado = idOrientadorSelecionado;
 	}
-	
-	
 }

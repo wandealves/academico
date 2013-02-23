@@ -10,6 +10,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 @Entity
 public class Aluno implements Serializable {
 	
@@ -32,64 +35,79 @@ public class Aluno implements Serializable {
 	
 	public Aluno(){}
 
-	public long getIdAluno() {
+	public long getIdAluno() 
+	{
 		return idAluno;
 	}
 
-	public void setIdAluno(long idAluno) {
+	public void setIdAluno(long idAluno) 
+	{
 		this.idAluno = idAluno;
 	}
 
-	public String getNome() {
+	public String getNome()
+	{
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(String nome) 
+	{
 		this.nome = nome;
 	}
 
-	public Calendar getDataNascimento() {
+	public Calendar getDataNascimento() 
+	{
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Calendar dataNascimento) {
+	public void setDataNascimento(Calendar dataNascimento) 
+	{
 		this.dataNascimento = dataNascimento;
 	}
 
-	public String getCpf() {
+	public String getCpf() 
+	{
 		return cpf;
 	}
 
-	public void setCpf(String cpf) {
+	public void setCpf(String cpf) 
+	{
 		this.cpf = cpf;
 	}
 
-	public String getMatricula() {
+	public String getMatricula() 
+	{
 		return matricula;
 	}
 
-	public void setMatricula(String matricula) {
+	public void setMatricula(String matricula) 
+	{
 		this.matricula = matricula;
 	}
 
-	public Orientador getOrientador() {
+	public Orientador getOrientador() 
+	{
 		return orientador;
 	}
 
-	public void setOrientador(Orientador orientador) {
+	public void setOrientador(Orientador orientador) 
+	{
 		this.orientador = orientador;
 	}
 
-	public byte getSexo() {
+	public byte getSexo() 
+	{
 		return sexo;
 	}
 
-	public void setSexo(byte sexo) {
+	public void setSexo(byte sexo) 
+	{
 		this.sexo = sexo;
 	}
 
 	@Override
-	public int hashCode() {
+	public int hashCode() 
+	{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
@@ -106,7 +124,8 @@ public class Aluno implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) 
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)

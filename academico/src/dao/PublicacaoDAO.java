@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.List;
-
 import modelo.Publicacao;
 
 public interface PublicacaoDAO {
@@ -10,5 +9,6 @@ public interface PublicacaoDAO {
 	void deletar(Publicacao publicacao) throws Exception;
 	Publicacao buscarPublicacaoID(long id) throws Exception;
 	List<Publicacao> listar() throws Exception;
-
+	List listaID(long id) throws Exception;
+	List<Publicacao> buscaOrientadorPublicacao(long id)throws Exception;
 }

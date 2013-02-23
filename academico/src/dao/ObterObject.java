@@ -1,9 +1,15 @@
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import modelo.Aluno;
+import modelo.PublicacaoAlunoOrientador;
 
 import org.hibernate.*;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
+import org.hibernate.type.LongType;
 
 import util.HibernateUtil;
 
@@ -229,5 +235,72 @@ public class ObterObject <T>{
                  }
              }
         }
-
+        
+        public boolean verificaExistencia(long id,String nomeTabela,String campo) throws Exception {
+    		List lista 	= new ArrayList();
+    		boolean flag = false;
+    		try
+            {
+               this.session 	= HibernateUtil.getSessionFactory().getCurrentSession();
+               this.transacao 	= this.session.beginTransaction();
+               String sql		= "SELECT DISTINCT idAluno";
+               sql				+=" FROM "+ nomeTabela;
+               sql				+=" WHERE " + campo+"="+id;
+             
+               SQLQuery query                                             = this.session.createSQLQuery(sql);
+               lista 												   = query.list();
+               if(lista.size() > 0)
+               {
+            	   flag = true;
+               }
+            }
+            catch(Exception erro)
+            {
+            	System.out.println("ERRO:"+erro.getMessage());
+            }
+            finally
+            {
+                try
+                {
+                    if(this.session.isOpen())
+                        this.session.close();
+                }
+                catch(Exception e)
+                {
+                }
+            }
+            return flag;
+    	}
+        
+        public List<T> buscaPorIdRelacionamento(long id,String campo) throws Exception
+        {
+            List<T> objGen                                          = null;
+            try
+            {
+                session                                             = HibernateUtil.getSessionFactory().getCurrentSession();
+                transacao                                           = session.beginTransaction();
+                Criteria filtro                                     = session.createCriteria(objeto.getClass()).add(Restrictions.eq(campo, id));
+                objGen                                              = filtro.list();
+                transacao.commit();
+            }
+            catch(Exception erro)
+            {
+               if(transacao.isActive())
+                   transacao.rollback();
+               throw new Exception(erro.getMessage());
+            }
+            finally
+            {
+                try
+                {
+                }
+                catch(Exception erro)
+                {
+                    if(session.isOpen())
+                        session.close();
+                    throw new Exception(erro.getMessage());
+                }
+            }
+            return objGen;
+        }
 }

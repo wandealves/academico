@@ -30,17 +30,20 @@
       <LEGEND>Orientador</LEGEND>
       <h:panelGrid columns="2">
       <h:outputLabel id="lblOrientador" for="lblOrientador" value="Selecione o Orientador:" styleClass="lblOrientador"/>
-      <h:selectOneMenu id="orientador" value="#{publicacaoBean.idOrientador}" styleClass="slOrientador" required="true" requiredMessage="Escolha um Orientador" >
+      <h:selectOneMenu id="orientador" value="#{publicacaoBean.idOrientadorSelecionado}" styleClass="slOrientador" required="true" requiredMessage="Escolha um Orientador" >
       <f:selectItems value="#{publicacaoBean.orientadores}" var="orientador" itemLabel="#{orientador.nome}" itemValue="#{orientador.idOrientador}"/>
       </h:selectOneMenu>
       <h:commandButton id="btnGravarOriendaor" value="Gravar Orientador" action="#{publicacaoBean.gravarOrientador}" styleClass="btnGravarOriendaor">
-      <f:ajax execute="orientador"/>
+      <f:ajax execute="orientador" render="txtOrientdaorSelecionado"/>
       </h:commandButton>
       
       <h:commandLink action="#{publicacaoBean.novoOrientador}" title="Clique Aqui para Cadastrar um novo Orientador" immediate="true" styleClass="linkNovoOrientador">
       <h:graphicImage library="img" name="novo.png"></h:graphicImage>
-      <f:ajax execute="orientador"/>
+     <f:ajax execute="orientador" />
       </h:commandLink>
+      
+        <h:outputLabel id="lblOrientadorSelecionado" for="lblOrientadorSelecionado" value="Orientador Selecionado:"/>
+      <h:outputText id="txtOrientdaorSelecionado" value="#{publicacaoBean.nomeOrientadorSelecionado}" style="font-family: arial;font-weight: bold;"/>
         
       </h:panelGrid>
       </fieldset>
@@ -54,7 +57,7 @@
       <f:selectItems value="#{publicacaoBean.alunos}" var="aluno" itemLabel="#{aluno.nome}" itemValue="#{aluno.idAluno}"/>
       </h:selectOneMenu>
       <h:commandButton id="btnGravarAluno" value="Gravar Aluno" action="#{publicacaoBean.gravarAluno}" styleClass="btnGravarAluno">
-      <f:ajax execute="slAluno"/>
+      <f:ajax execute="slAluno" render="listaAlunoSelecionados"/>
       </h:commandButton>
       
       <h:commandLink action="#{publicacaoBean.novoAluno}" immediate="true" styleClass="linkNovoAluno">
@@ -62,19 +65,20 @@
       <f:ajax execute="slAluno"/>
       </h:commandLink>
       
-      <h:dataTable id="listaAluno" value="#{publicacaoBean.alunoDataTable}" var="alunos">
-      </h:dataTable>
-      <h:column>
+       <h:dataTable id="listaAlunoSelecionados"  value="#{publicacaoBean.alunosSelecionados}" var="alunos">
+        <h:column>
       <h:outputLabel value="#{alunos.nome}"/>
       </h:column>
+      </h:dataTable>
+   
       </h:panelGrid>
       </fieldset>
       
 
       <h:panelGrid columns="3">
-      <h:commandButton value="Novo" action="#{orientadorBean.novo}" styleClass="btnNovo"/>
-      <h:commandButton value="Salvar" action="#{orientadorBean.salvar}" styleClass="btnSalvar"/>
-      <h:commandButton value="Excluir" action="#{orientadorBean.excluir}" styleClass="btnExcluir"/>
+      <h:commandButton value="Novo" action="#{publicacaoBean.novo}" styleClass="btnNovo"/>
+      <h:commandButton value="Salvar" action="#{publicacaoBean.salvar}" styleClass="btnSalvar"/>
+      <h:commandButton value="Excluir" action="#{publicacaoBean.excluir}" styleClass="btnExcluir"/>
       </h:panelGrid>
        </fieldset>
       </h:form>

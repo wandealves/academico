@@ -3,9 +3,11 @@ package dao;
 import java.util.List;
 
 import modelo.Orientador;
-
-public interface OrientadorDAO {
-	
+/**
+ * @author http://javaes.wordpress.com/
+ * */
+public interface OrientadorDAO 
+{
 	void salvar(Orientador orientador) throws Exception;
 	void deletar(Orientador orientador) throws Exception;
 	Orientador buscarOrientadorID(long id) throws Exception;

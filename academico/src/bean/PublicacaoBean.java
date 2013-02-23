@@ -1,5 +1,8 @@
 package bean;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -12,25 +15,29 @@ import util.Constantes;
 
 import RN.AlunoRN;
 import RN.OrientadorRN;
+import RN.PublicacaoAlunoOrientadorRN;
 import RN.PublicacaoRN;
 
 import modelo.Aluno;
 import modelo.Orientador;
 import modelo.Publicacao;
+import modelo.PublicacaoAlunoOrientador;
 
 @ManagedBean
 @SessionScoped
 public class PublicacaoBean {
 
 	private Publicacao publicacao = new Publicacao();
-	private List<Publicacao> lista;
+	private List<PublicacaoAlunoOrientador> lista;
 	private Constantes constantes = new Constantes();
-	private long idOrientador;
+	private long idOrientadorSelecionado;
 	private List<Orientador> orientadores;
 	private long idAluno;
 	private List<Aluno> alunos;
-	private Set<Aluno> alunoDataTable;
+	private List<Aluno> alunosSelecionados = new ArrayList();
 	public String tipo;
+	private String nomeOrientadorSelecionado;
+	private PublicacaoAlunoOrientador publicacaoAlunoOrientador = new PublicacaoAlunoOrientador();
 
 	public Publicacao getPublicacao() {
 		return publicacao;
@@ -40,10 +47,10 @@ public class PublicacaoBean {
 		this.publicacao = publicacao;
 	}
 
-	public List<Publicacao> getLista() throws Exception {
+	public List<PublicacaoAlunoOrientador> getLista() throws Exception {
 		if(this.lista == null)
 		{
-			this.lista = PublicacaoRN.listar();
+			this.lista = PublicacaoAlunoOrientadorRN.listar();
 		}
 		return lista;
 	}	
@@ -57,12 +64,12 @@ public class PublicacaoBean {
 	}
 	
 	
-	public long getIdOrientador() {
-		return idOrientador;
+	public long getIdOrientadorSelecionado() {
+		return idOrientadorSelecionado;
 	}
 
-	public void setIdOrientador(long idOrientador) {
-		this.idOrientador = idOrientador;
+	public void setIdOrientadorSelecionado(long idOrientador) {
+		this.idOrientadorSelecionado = idOrientador;
 	}
 	
 	
@@ -100,27 +107,59 @@ public class PublicacaoBean {
 	}
 	
 	
-
-	public Set<Aluno> getAlunoDataTable() {
-		return alunoDataTable;
+	public List<Aluno> getAlunosSelecionados() {
+		return alunosSelecionados;
 	}
 
-	public void setAlunoDataTable(Set<Aluno> alunoDataTable) {
-		this.alunoDataTable = alunoDataTable;
+	public void setAlunosSelecionados(List<Aluno> alunosSelecionados) {
+		this.alunosSelecionados = alunosSelecionados;
+	}
+	
+	
+	public String getNomeOrientadorSelecionado() {
+		return nomeOrientadorSelecionado;
 	}
 
-	public String salvar()
+	public void setNomeOrientadorSelecionado(String nomeOrientadorSelecionado) {
+		this.nomeOrientadorSelecionado = nomeOrientadorSelecionado;
+	}
+	
+	
+	public PublicacaoAlunoOrientador getPublicacaoAlunoOrientador() {
+		return publicacaoAlunoOrientador;
+	}
+
+	public void setPublicacaoAlunoOrientador(
+			PublicacaoAlunoOrientador publicacaoAlunoOrientador) {
+		this.publicacaoAlunoOrientador = publicacaoAlunoOrientador;
+	}
+
+	public void salvar()
 	{
 		try 
 		{
+		
+			if(this.alunosSelecionados.size() == 0){
+				FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Adicione ao menos um aluno na publicação."));
+				return;
+			}
+				if(publicacao.getOrientador() == null){
+					FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Adicione o orientador na publicação."));
+					return;
+				}
+			publicacao.setAlunos(PublicacaoRN.carregaAlunos(this.alunosSelecionados));
+			publicacao.setTipo(tipo);
 			PublicacaoRN.salvar(publicacao);
+			
+			this.nomeOrientadorSelecionado = "";
+			this.alunosSelecionados = null;
+			this.publicacao = null;
 			this.lista = null;
+			FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Publicação salva com sucesso!"));
 		} 
 		catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage("curso", new FacesMessage("Erro a Salvar Publicação"));
-			return null;
+			FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Erro a Salvar Publicação"));
 		}
-		return "/listaPublicacao?faces-redirect=true";
 	}
 	
 	public String excluir()
@@ -138,14 +177,30 @@ public class PublicacaoBean {
 	}
 	
 	public void novo(){
-		this.publicacao = new Publicacao();
+		this.publicacao = null;
+		this.nomeOrientadorSelecionado = "";
+		this.alunosSelecionados = null;
 	}
 	
-	public String editar(){
+	public String editar() throws NumberFormatException, Exception{
+		this.publicacao 						= PublicacaoRN.buscarPublicacaoID(this.publicacaoAlunoOrientador.getIdPublicacao());
+		this.nomeOrientadorSelecionado 			= this.publicacao.getOrientador().getNome();
+		this.idOrientadorSelecionado 			= this.publicacao.getOrientador().getIdOrientador();
+		this.alunosSelecionados 				= PublicacaoRN.listaID(publicacao.getIdPublicacao());
 		return "/publicacao?faces-redirect=true";
 	}
 	
-	public void gravarOrientador(){
+	public void gravarOrientador() throws Exception{
+		
+		if(this.idOrientadorSelecionado > 0){
+			Orientador orientador = OrientadorRN.buscarOrientadorID(this.idOrientadorSelecionado);
+			this.publicacao.setOrientador(orientador);
+			this.nomeOrientadorSelecionado = orientador.getNome();
+			}
+			else
+			{
+				FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Selecione um orientador."));
+			}
 		
 	}
 	
@@ -155,9 +210,16 @@ public class PublicacaoBean {
 	
 	public void gravarAluno(){
 		
-		try {
+		try 
+		{
+			if(idAluno > 0){
 			Aluno aluno = AlunoRN.buscarAlunoID(idAluno);
-			this.alunoDataTable.add(aluno);
+			this.alunosSelecionados.add(aluno);
+			}
+			else
+			{
+				FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Selecione um aluno."));
+			}
 		} catch (Exception e) 
 		{
 			// TODO Auto-generated catch block

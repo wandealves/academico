@@ -15,12 +15,15 @@
      	<f:facet name="header">Listagem de Publicações</f:facet>
      	<f:facet name="footer">Final da Listagem de Publicações</f:facet>
      	<h:column>
+		<h:inputHidden value="#{publicacao.nomeOrientador}"></h:inputHidden>
+     	</h:column>
+     	<h:column>
      	<f:facet name="header">Orientador</f:facet>
-     	#{publicacao.orientador.nome}
+     	#{publicacao.nomeOrientador}
      	</h:column>
      	<h:column>
      	<f:facet name="header">Aluno</f:facet>
-     	#{publicacao.orientador.nome}
+     	#{publicacao.nomeAluno}
      	</h:column>
      	<h:column>
      	<f:facet name="header">Titulo</f:facet>
@@ -33,13 +36,13 @@
      	<h:column>
      	<h:commandLink action="#{publicacaoBean.editar}">
      	<h:graphicImage library="img" name="editar.png" style="border:0"/>
-     	<f:setPropertyActionListener target="#{publicacaoBean.publicacao}" value="#{publicacao}"/>
+     	<f:setPropertyActionListener target="#{publicacaoBean.publicacaoAlunoOrientador}" value="#{publicacao}"/>
      	</h:commandLink>
      	</h:column>
      	<h:column>
      	<h:commandLink action="#{publicacaoBean.excluir}" onclick="if(!confirm('Confirma a exclusão da publicação: #{publicacao.titulo}?')) return false;">
      	<h:graphicImage library="img" name="excluir.png" style="border:0"/>
-     	<f:setPropertyActionListener target="#{publicacaoBean.publicacao}" value="#{publicacao}"/>
+     	<f:setPropertyActionListener target="#{publicacaoBean.publicacaoAlunoOrientador}" value="#{publicacao}"/>
      	</h:commandLink>
      	</h:column>
      	</h:dataTable>
