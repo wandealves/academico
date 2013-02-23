@@ -1,0 +1,56 @@
+CREATE TABLE orientador(
+idOrientador int(11) AUTO_INCREMENT,
+nome varchar(100) NOT NULL,
+cpf varchar(20) NOT NULL,
+instituicao varchar(120) NOT NULL,
+titulacao varchar(100) NOT NULL,
+CONSTRAINT pkOrientador PRIMARY KEY (idOrientador)
+);
+
+CREATE TABLE aluno(
+idAluno int(11) AUTO_INCREMENT,
+matricula varchar(100) NOT NULL,
+nome varchar(100) NOT NULL,
+sexo tinyint NOT NULL DEFAULT 0,
+dataNascimento date NOT NULL,
+cpf varchar(20) NOT NULL,
+idOrientador int(11) NOT NULL,
+CONSTRAINT pkAluno PRIMARY KEY (idAluno),
+CONSTRAINT fkAluno_Orientador FOREIGN KEY(idOrientador) REFERENCES orientador(idOrientador)
+);
+CREATE TABLE curso(
+idCurso int(11) AUTO_INCREMENT,
+nome varchar(100) NOT NULL,
+CONSTRAINT pkCurso PRIMARY KEY (idCurso)
+);
+CREATE TABLE curso_aluno(
+idAluno int(11) NOT NULL,
+idCurso int(11) NOT NULL,
+CONSTRAINT pkCurso_Aluno PRIMARY KEY (idAluno,idCurso),
+CONSTRAINT fkCurso_Aluno_Curso FOREIGN KEY(idCurso) REFERENCES curso(idCurso)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION,
+CONSTRAINT fkCurso_Aluno_Aluno FOREIGN KEY(idAluno) REFERENCES aluno(idAluno)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+);
+CREATE TABLE publicacao(
+idPublicacao int(11) AUTO_INCREMENT,
+titulo varchar(100) NOT NULL,
+tipo varchar(100) NOT NULL,
+dataPublicacao date NOT NULL,
+idOrientador int(11) NOT NULL,
+CONSTRAINT pkPublicacao PRIMARY KEY (idPublicacao),
+CONSTRAINT fkPublicacao_Orientador FOREIGN KEY(idOrientador) REFERENCES orientador(idOrientador)
+);
+CREATE TABLE publicacao_aluno(
+idAluno int(11) NOT NULL,
+idPublicacao int(11) NOT NULL,
+CONSTRAINT pkPublicacao_Aluno PRIMARY KEY (idAluno,idPublicacao),
+CONSTRAINT fkPublicacao_Aluno_publicacao FOREIGN KEY(idpublicacao) REFERENCES publicacao(idpublicacao)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION,
+CONSTRAINT fkPublicacao_Aluno_Aluno FOREIGN KEY(idAluno) REFERENCES aluno(idAluno)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+);
