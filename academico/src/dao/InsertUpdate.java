@@ -3,8 +3,11 @@ package dao;
 import org.hibernate.*;
 
 import util.HibernateUtil;
-
-public class InsertUpdate {
+/**
+ * @author http://javaes.wordpress.com/
+ * */
+public class InsertUpdate 
+{
 	
 	private static Session session; 
     private static Transaction transacao;

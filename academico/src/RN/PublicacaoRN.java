@@ -11,7 +11,9 @@ import modelo.Orientador;
 import modelo.Publicacao;
 
 import dao.*;
-
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 public class PublicacaoRN {
 
 private static PublicacaoDAO publicacaoDAO;

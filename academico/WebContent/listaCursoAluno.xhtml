@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<ui:composition template="/template/_template.xhtml">
+      <ui:define name="conteudo">
+		<h:form>
+			<h:messages/>
+     	<h:dataTable  value="#{cursoAlunoBean.lista}" var="cursoAluno" rules="rows" cellpadding="5">
+     	<f:facet name="caption">
+     	A listagem a seguir exibe a relação de todos alunos com curso do sistema.
+     	</f:facet>
+     	<f:facet name="header">Listagem de CursosxAlunos</f:facet>
+     	<f:facet name="footer">Final da Listagem de CursosxAlunos</f:facet>
+     	<h:column>
+		<h:inputHidden value="#{publicacao.nomeOrientador}"></h:inputHidden>
+     	</h:column>
+     	<h:column>
+     	<f:facet name="header">Curso</f:facet>
+     	#{cursoAluno.nomeCurso}
+     	</h:column>
+     	<h:column>
+     	<f:facet name="header">Aluno</f:facet>
+     	#{cursoAluno.nomeAluno}
+     	</h:column>
+     	</h:dataTable>
+		</h:form>
+	 </ui:define>
+     </ui:composition>
+</html>

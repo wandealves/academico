@@ -22,7 +22,9 @@ import modelo.Aluno;
 import modelo.Orientador;
 import modelo.Publicacao;
 import modelo.PublicacaoAlunoOrientador;
-
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 @ManagedBean
 @SessionScoped
 public class PublicacaoBean {
@@ -39,15 +41,18 @@ public class PublicacaoBean {
 	private String nomeOrientadorSelecionado;
 	private PublicacaoAlunoOrientador publicacaoAlunoOrientador = new PublicacaoAlunoOrientador();
 
-	public Publicacao getPublicacao() {
+	public Publicacao getPublicacao() 
+	{
 		return publicacao;
 	}
 
-	public void setPublicacao(Publicacao publicacao) {
+	public void setPublicacao(Publicacao publicacao) 
+	{
 		this.publicacao = publicacao;
 	}
 
-	public List<PublicacaoAlunoOrientador> getLista() throws Exception {
+	public List<PublicacaoAlunoOrientador> getLista() throws Exception 
+	{
 		if(this.lista == null)
 		{
 			this.lista = PublicacaoAlunoOrientadorRN.listar();
@@ -55,82 +60,99 @@ public class PublicacaoBean {
 		return lista;
 	}	
 	
-	public Constantes getConstantes() {
+	public Constantes getConstantes() 
+	{
 		return constantes;
 	}
 
-	public void setConstantes(Constantes constantes) {
+	public void setConstantes(Constantes constantes) 
+	{
 		this.constantes = constantes;
 	}
 	
 	
-	public long getIdOrientadorSelecionado() {
+	public long getIdOrientadorSelecionado() 
+	{
 		return idOrientadorSelecionado;
 	}
 
-	public void setIdOrientadorSelecionado(long idOrientador) {
+	public void setIdOrientadorSelecionado(long idOrientador) 
+	{
 		this.idOrientadorSelecionado = idOrientador;
 	}
 	
 	
-	public List<Orientador> getOrientadores() throws Exception {
+	public List<Orientador> getOrientadores() throws Exception 
+	{
 		return OrientadorRN.listar();
 	}
 
-	public void setOrientadores(List<Orientador> orientadores) {
+	public void setOrientadores(List<Orientador> orientadores) 
+	{
 		this.orientadores = orientadores;
 	}
 	
-	public long getIdAluno() {
+	public long getIdAluno() 
+	{
 		return idAluno;
 	}
 
-	public void setIdAluno(long idAluno) {
+	public void setIdAluno(long idAluno) 
+	{
 		this.idAluno = idAluno;
 	}
 	
-	public List<Aluno> getAlunos() throws Exception {
+	public List<Aluno> getAlunos() throws Exception 
+	{
 		return AlunoRN.listar();
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
+	public void setAlunos(List<Aluno> alunos)
+	{
 		this.alunos = alunos;
 	}
 	
 	
-	public String getTipo() {
+	public String getTipo() 
+	{
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(String tipo) 
+	{
 		this.tipo = tipo;
 	}
 	
 	
-	public List<Aluno> getAlunosSelecionados() {
+	public List<Aluno> getAlunosSelecionados() 
+	{
 		return alunosSelecionados;
 	}
 
-	public void setAlunosSelecionados(List<Aluno> alunosSelecionados) {
+	public void setAlunosSelecionados(List<Aluno> alunosSelecionados)
+	{
 		this.alunosSelecionados = alunosSelecionados;
 	}
 	
 	
-	public String getNomeOrientadorSelecionado() {
+	public String getNomeOrientadorSelecionado() 
+	{
 		return nomeOrientadorSelecionado;
 	}
 
-	public void setNomeOrientadorSelecionado(String nomeOrientadorSelecionado) {
+	public void setNomeOrientadorSelecionado(String nomeOrientadorSelecionado) 
+	{
 		this.nomeOrientadorSelecionado = nomeOrientadorSelecionado;
 	}
 	
 	
-	public PublicacaoAlunoOrientador getPublicacaoAlunoOrientador() {
+	public PublicacaoAlunoOrientador getPublicacaoAlunoOrientador()
+	{
 		return publicacaoAlunoOrientador;
 	}
 
-	public void setPublicacaoAlunoOrientador(
-			PublicacaoAlunoOrientador publicacaoAlunoOrientador) {
+	public void setPublicacaoAlunoOrientador(PublicacaoAlunoOrientador publicacaoAlunoOrientador) 
+	{
 		this.publicacaoAlunoOrientador = publicacaoAlunoOrientador;
 	}
 
@@ -139,14 +161,16 @@ public class PublicacaoBean {
 		try 
 		{
 		
-			if(this.alunosSelecionados.size() == 0){
+			if(this.alunosSelecionados.size() == 0)
+			{
 				FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Adicione ao menos um aluno na publicação."));
 				return;
 			}
-				if(publicacao.getOrientador() == null){
+			if(publicacao.getOrientador() == null)
+			{
 					FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Adicione o orientador na publicação."));
 					return;
-				}
+			}
 			publicacao.setAlunos(PublicacaoRN.carregaAlunos(this.alunosSelecionados));
 			publicacao.setTipo(tipo);
 			PublicacaoRN.salvar(publicacao);
@@ -157,7 +181,8 @@ public class PublicacaoBean {
 			this.lista = null;
 			FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Publicação salva com sucesso!"));
 		} 
-		catch (Exception e) {
+		catch (Exception e) 
+		{
 			FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Erro a Salvar Publicação"));
 		}
 	}
@@ -169,17 +194,20 @@ public class PublicacaoBean {
 			PublicacaoRN.deletar(publicacao);
 			this.lista = null;
 		} 
-		catch (Exception e) {
+		catch (Exception e) 
+		{
 			FacesContext.getCurrentInstance().addMessage("curso", new FacesMessage("Erro ao excluir Publicação"));
 			return null;
 		}
 		return "/listaPublicacao?faces-redirect=true";
 	}
 	
-	public void novo(){
-		this.publicacao = null;
+	public String novo()
+	{
+		this.publicacao = new Publicacao();
 		this.nomeOrientadorSelecionado = "";
 		this.alunosSelecionados = null;
+		return "publicacao?faces-redirect=true";
 	}
 	
 	public String editar() throws NumberFormatException, Exception{
@@ -212,7 +240,8 @@ public class PublicacaoBean {
 		
 		try 
 		{
-			if(idAluno > 0){
+			if(idAluno > 0)
+			{
 			Aluno aluno = AlunoRN.buscarAlunoID(idAluno);
 			this.alunosSelecionados.add(aluno);
 			}
@@ -228,7 +257,26 @@ public class PublicacaoBean {
 		
 	}
 	
-	public String novoAluno(){
+	public String novoAluno()
+	{
 		return "aluno?faces-redirect=true";
+	}
+	
+	public void excluirPublicacaoLista()
+	{
+		if(this.publicacaoAlunoOrientador != null)
+		{
+			try
+			{
+				Publicacao pl = PublicacaoRN.buscarPublicacaoID(this.publicacaoAlunoOrientador.getIdPublicacao());
+				PublicacaoRN.deletar(pl);
+				this.lista = null;
+			} 
+			catch (Exception e) 
+			{
+				FacesContext.getCurrentInstance().addMessage("publicacao", new FacesMessage("Erro ao excluir."));
+			}
+			
+		}
 	}
 }

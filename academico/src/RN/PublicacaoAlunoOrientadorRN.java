@@ -5,7 +5,9 @@ import java.util.*;
 import dao.PublicacaoAlunoOrientadorDAO;
 import dao.PublicacaoAlunoOrientadorDAOHibernate;
 import modelo.*;
-
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 public class PublicacaoAlunoOrientadorRN {
 	
 	private static PublicacaoAlunoOrientadorDAO dao;

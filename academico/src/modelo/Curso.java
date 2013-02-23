@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 @Entity
 public class Curso implements Serializable{
 	
@@ -27,27 +30,33 @@ public class Curso implements Serializable{
 	
 	public Curso(){}
 
-	public long getIdCurso() {
+	public long getIdCurso() 
+	{
 		return idCurso;
 	}
 
-	public void setIdCurso(long idCurso) {
+	public void setIdCurso(long idCurso) 
+	{
 		this.idCurso = idCurso;
 	}
 
-	public String getNome() {
+	public String getNome() 
+	{
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(String nome) 
+	{
 		this.nome = nome;
 	}
 
-	public Set<Aluno> getAlunos() {
+	public Set<Aluno> getAlunos() 
+	{
 		return alunos;
 	}
 
-	public void setAlunos(Set<Aluno> alunos) {
+	public void setAlunos(Set<Aluno> alunos) 
+	{
 		this.alunos = alunos;
 	}
 

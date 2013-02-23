@@ -2,7 +2,9 @@ package bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 @ManagedBean
 @SessionScoped
 public class LinkBean {
@@ -44,4 +46,13 @@ public class LinkBean {
 		return "publicacao?faces-redirect=true";
 	}
 	
+	public String linkCursoAluno()
+	{
+		return "cursoaluno?faces-redirect=true";
+	}
+	
+	public String listaLinkCursoAluno()
+	{
+		return "listaCursoAluno?faces-redirect=true";
+	}
 }

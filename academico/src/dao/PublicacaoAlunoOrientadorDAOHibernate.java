@@ -1,20 +1,16 @@
 package dao;
 
-import java.util.Iterator;
 import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.transform.Transformers;
 import org.hibernate.type.LongType;
-import org.hibernate.type.StringType;
-
-import com.sun.xml.internal.ws.org.objectweb.asm.Type;
-
 import util.HibernateUtil;
-
 import modelo.PublicacaoAlunoOrientador;
-
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 public class PublicacaoAlunoOrientadorDAOHibernate implements PublicacaoAlunoOrientadorDAO{
 
 	  private Session session; 

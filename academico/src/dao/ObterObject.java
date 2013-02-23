@@ -12,8 +12,11 @@ import org.hibernate.transform.Transformers;
 import org.hibernate.type.LongType;
 
 import util.HibernateUtil;
-
-public class ObterObject <T>{
+/**
+ * @author http://javaes.wordpress.com/
+ * */
+public class ObterObject <T>
+{
 	
 	 
     T objeto;
@@ -272,14 +275,14 @@ public class ObterObject <T>{
             return flag;
     	}
         
-        public List<T> buscaPorIdRelacionamento(long id,String campo) throws Exception
+        public List<T> buscaPorIdRelacionamento(Object obj,String campo) throws Exception
         {
             List<T> objGen                                          = null;
             try
             {
                 session                                             = HibernateUtil.getSessionFactory().getCurrentSession();
                 transacao                                           = session.beginTransaction();
-                Criteria filtro                                     = session.createCriteria(objeto.getClass()).add(Restrictions.eq(campo, id));
+                Criteria filtro                                     = session.createCriteria(objeto.getClass()).add(Restrictions.eq(campo, obj));
                 objGen                                              = filtro.list();
                 transacao.commit();
             }

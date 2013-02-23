@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+       xmlns:ui="http://java.sun.com/jsf/facelets">
+       <ui:composition template="/template/_template.xhtml">
+      <ui:define name="conteudo">
+      <h:form>
+      <h:messages/>
+      <h:inputHidden value="#{cursoBean.curso.idCurso}"/>
+      <fieldset>
+      <LEGEND>Cadastro de CursoxAluno</LEGEND>
+      <h:panelGrid columns="2">
+   
+      <h:outputLabel id="lblCurso" for="lblCursor" value="Selecione o Curso:" styleClass="lblCurso" />
+      <h:selectOneMenu id="curso" value="#{cursoAlunoBean.idCursoSeleciondao}" styleClass="slCursoaluno" required="true" requiredMessage="Escolha um Curso" >
+      <f:selectItems value="#{cursoAlunoBean.cursos}" var="curso" itemLabel="#{curso.nome}" itemValue="#{curso.idCurso}"/>
+      </h:selectOneMenu>
+      <h:commandButton id="btnGravarCurso" value="Gravar Curso" action="#{cursoAlunoBean.gravarCurso}" styleClass="btnGravarCurso">
+      <f:ajax execute="curso" render="txtCursoSelecionado"/>
+      </h:commandButton>
+      <h:commandLink action="#{cursoAlunoBean.novoCurso}" immediate="true" styleClass="linkNovoCurso">
+      <h:graphicImage library="img" name="novo.png"></h:graphicImage>
+      </h:commandLink>
+      <h:outputLabel id="lblCursoSelecionado" for="lblCursoSelecionado" value="Curso Selecionado:"/>
+      <h:outputText id="txtCursoSelecionado" value="#{cursoAlunoBean.nomeCursoSelecionado}" style="font-family: arial;font-weight: bold;"/>
+      </h:panelGrid>
+      </fieldset>
+      <br/>
+      
+        <fieldset>
+      <LEGEND>Aluno</LEGEND>
+      <h:panelGrid columns="2">
+      <h:outputLabel id="lblAluno" for="lblAluno" value="Selecione o Aluno:" styleClass="lblAluno"/>
+      <h:selectOneMenu id="slAluno" value="#{cursoAlunoBean.idAluno}" styleClass="slAluno" required="true" requiredMessage="Escolha um Aluno" >
+      <f:selectItems value="#{cursoAlunoBean.alunos}" var="aluno" itemLabel="#{aluno.nome}" itemValue="#{aluno.idAluno}"/>
+      </h:selectOneMenu>
+      <h:commandButton id="btnGravarAluno" value="Gravar Aluno" action="#{cursoAlunoBean.gravarAluno}" styleClass="btnGravarAluno">
+      <f:ajax execute="slAluno" render="listaAlunoSelecionados"/>
+      </h:commandButton>
+      
+      <h:commandLink action="#{cursoAlunoBean.novoAluno}" immediate="true" styleClass="linkNovoAluno">
+      <h:graphicImage library="img" name="novo.png"></h:graphicImage>
+      <f:ajax execute="slAluno"/>
+      </h:commandLink>
+      
+       <h:dataTable id="listaAlunoSelecionados"  value="#{cursoAlunoBean.alunosSelecionados}" var="alunos">
+        <h:column>
+      <h:outputLabel value="#{alunos.nome}"/>
+      </h:column>
+      </h:dataTable>
+   
+      </h:panelGrid>
+      </fieldset>
+      <br/>
+      
+      <h:panelGrid columns="3">
+      <h:commandButton value="Novo" action="#{cursoAlunoBean.novo}" immediate="true"/>
+      <h:commandButton value="Salvar" action="#{cursoAlunoBean.salvar}"/>
+      </h:panelGrid>
+      </h:form>
+        </ui:define>
+     </ui:composition>
+</html>

@@ -35,6 +35,7 @@ public class OrientadorBean
 			{
 				OrientadorRN.salvar(orientador);
 				FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Orientador Salvo com sucesso!"));
+				this.lista = null;
 			}
 		} 
 		catch (Exception e)
@@ -45,17 +46,21 @@ public class OrientadorBean
 		return null;
 	}
 	
-	public void excluir()
+	public String excluir()
 	{
 		try 
 		{
 			if(PublicacaoRN.buscaOrientadorPublicacao(orientador.getIdOrientador()))
+			{
 				FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Não foi possível excluir, pois existe publicação relacionada."));
+				return null;
+			}
 			else
 			{
 				if(AlunoRN.buscaOrientadorAluno(orientador.getIdOrientador()))
 				{
 					FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Não foi possível excluir, pois existe aluno relacionada."));
+					return null;
 				}
 				else
 				{
@@ -70,10 +75,13 @@ public class OrientadorBean
 		{
 			FacesContext.getCurrentInstance().addMessage("orientador", new FacesMessage("Erro ao excluir Orientador"));
 		}
+		this.lista = null;
+		return "listaOrientador?faces-redirect=true";
 	}
 	
 	public String novo()
 	{
+		this.orientador = new Orientador();
 		return "orientador?faces-redirect=true";
 	}
 	

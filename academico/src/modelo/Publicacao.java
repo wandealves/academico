@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.*;
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 @Entity
 public class Publicacao implements Serializable{
 	

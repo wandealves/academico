@@ -1,5 +1,7 @@
 package modelo;
-
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 public class PublicacaoAlunoOrientador {
 	
 	private String titulo;

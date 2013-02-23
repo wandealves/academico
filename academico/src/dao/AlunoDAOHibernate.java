@@ -2,7 +2,11 @@ package dao;
 
 import java.util.List;
 
+import RN.AlunoRN;
+import RN.OrientadorRN;
+
 import modelo.Aluno;
+import modelo.Orientador;
 /**
  * @author http://javaes.wordpress.com/
  * */
@@ -60,7 +64,8 @@ public class AlunoDAOHibernate implements AlunoDAO{
 	public List<Aluno> buscaOrientadorAluno(long id) throws Exception 
 	{
 		ObterObject<Aluno> obj = new  ObterObject<Aluno>(new Aluno());
-		return obj.buscaPorIdRelacionamento(id,"idOrientador");
+		Orientador or = OrientadorRN.buscarOrientadorID(id);
+		return obj.buscaPorIdRelacionamento(or,"orientador");
 	}
 
 }

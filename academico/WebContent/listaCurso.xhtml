@@ -28,7 +28,7 @@
      	<h:column>
      	<h:commandLink action="#{cursoBean.excluir}" onclick="if(!confirm('Confirma a exclusão do curso: #{curso.nome}?')) return false;">
      	<h:graphicImage library="img" name="excluir.png" style="border:0"/>
-     	<f:setPropertyActionListener target="#{cursoBean.orientador}" value="#{curso}"/>
+     	<f:setPropertyActionListener target="#{cursoBean.curso}" value="#{curso}"/>
      	</h:commandLink>
      	</h:column>
      	</h:dataTable>

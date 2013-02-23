@@ -82,7 +82,7 @@ public class AlunoBean
 		}
 	}
 	
-	public void excluirAluno()
+	public String excluirAluno()
 	{
 		try 
 		{ 
@@ -99,12 +99,14 @@ public class AlunoBean
 		catch (Exception erro) 
 		{
 			FacesContext.getCurrentInstance().addMessage("aluno", new FacesMessage(erro.getMessage()));
-			return;
+			return null;
 		}
+		return "listaAluno?faces-redirect=true";
 	}
 	
 	public String novo()
 	{
+		this.aluno = new Aluno();
 		this.nomeOrientadorSelecionado = "";
 		return "aluno?faces-redirect=true";
 	}

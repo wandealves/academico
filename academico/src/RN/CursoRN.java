@@ -6,9 +6,11 @@ import dao.CursoDAO;
 import dao.CursoDAOHibernate;
 
 import modelo.Curso;
-
-
-public class CursoRN {
+/**
+ * @author http://javaes.wordpress.com/
+ * */
+public class CursoRN 
+{
 	
 private static CursoDAO cursoDAO;
 	
@@ -34,6 +36,12 @@ private static CursoDAO cursoDAO;
 	{
 		cursoDAO = new CursoDAOHibernate();
 		return cursoDAO.listar();
+	}
+	
+	public static boolean verificaExistencia(long id) throws Exception
+	{
+		cursoDAO = new CursoDAOHibernate();
+		return 		cursoDAO.verificaExistencia(id);
 	}
 
 }

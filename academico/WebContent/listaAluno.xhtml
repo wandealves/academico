@@ -28,7 +28,13 @@
      	</h:column>
      	<h:column>
      	<f:facet name="header">Data Nascimento</f:facet>
-     	#{aluno.dataNascimento.time}
+     	<h:outputText value="#{aluno.dataNascimento.time}">
+     	<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+     	</h:outputText>
+     	</h:column>
+     	<h:column>
+     	<f:facet name="header">Sexo</f:facet>
+     	<h:graphicImage library="img" name="#{aluno.sexo}.png" style="border:0"/>
      	</h:column>
      	<h:column>
      	<h:commandLink action="#{alunoBean.editar}" >

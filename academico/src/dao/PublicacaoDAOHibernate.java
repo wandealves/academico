@@ -5,14 +5,14 @@ import java.util.List;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.transform.Transformers;
-import org.hibernate.type.LongType;
-
+import RN.OrientadorRN;
 import util.HibernateUtil;
 import modelo.Orientador;
 import modelo.Publicacao;
 import modelo.PublicacaoAlunoOrientador;
-
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 public class PublicacaoDAOHibernate implements PublicacaoDAO{
 	private Session session; 
 	private Transaction transacao;
@@ -75,7 +75,8 @@ public class PublicacaoDAOHibernate implements PublicacaoDAO{
 	@Override
 	public List<Publicacao> buscaOrientadorPublicacao(long id) throws Exception {
 		ObterObject<Publicacao> obj = new  ObterObject<Publicacao>(new Publicacao());
-		return obj.buscaPorIdRelacionamento(id,"idOrientador");
+		Orientador or = OrientadorRN.buscarOrientadorID(id);
+		return obj.buscaPorIdRelacionamento(or,"orientador");
 	}
 
 }

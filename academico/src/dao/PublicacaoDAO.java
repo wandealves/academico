@@ -2,7 +2,9 @@ package dao;
 
 import java.util.List;
 import modelo.Publicacao;
-
+/**
+ * @author http://javaes.wordpress.com/
+ * */
 public interface PublicacaoDAO {
 	
 	void salvar(Publicacao publicacao) throws Exception;
